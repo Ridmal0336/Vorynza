@@ -1,0 +1,21 @@
+# Build
+**/target/
+**/node_modules/
+**/dist/
+**/.vite/
+
+# IDE
+.idea/workspace.xml
+.idea/shelf/
+.idea/httpRequests/
+*.iml
+!.idea/runConfigurations/
+
+# Env / secrets
+**/application-local.properties
+.env
+.env.*
+
+# OS
+Thumbs.db
+.DS_Store
