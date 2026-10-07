@@ -85,18 +85,7 @@ public class DataSeeder implements CommandLineRunner {
         String hash = passwordEncoder.encode(DEFAULT_PASSWORD);
         upsertDemoUser("System Admin", ADMIN_EMAIL, hash, "0770000001", "Colombo", UserRole.ADMIN);
         upsertDemoUser("Demo Customer", CUSTOMER_EMAIL, hash, "0770000002", "Kandy", UserRole.CUSTOMER);
-        repairLegacySeededPasswords(hash);
         log.info("Demo logins ready: {} / {} (password {})", ADMIN_EMAIL, CUSTOMER_EMAIL, DEFAULT_PASSWORD);
-    }
-
-    private void repairLegacySeededPasswords(String hash) {
-        userRepository.findAll().stream()
-                .filter(user -> user.getPasswordHash() != null
-                        && user.getPasswordHash().startsWith("hashed_password_"))
-                .forEach(user -> {
-                    user.setPasswordHash(hash);
-                    userRepository.save(user);
-                });
     }
 
     private void upsertDemoUser(
